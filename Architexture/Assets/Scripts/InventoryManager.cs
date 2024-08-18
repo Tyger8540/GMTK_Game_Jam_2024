@@ -4,35 +4,42 @@ using TMPro;
 using UnityEngine;
 using static BlueprintController;
 
-public class InventoryManager : MonoBehaviour
+[CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory")]
+public class InventoryManager : ScriptableObject
 {
-    public TextMeshProUGUI interactText;
-
-    //private List<>
-    // Start is called before the first frame update
-    void Start()
+    public List<InventorySlot> container = new List<InventorySlot>();
+    public void AddBlueprint(Blueprint _blueprint, int _amount)
     {
-        
+        bool hasItem = false;
+        for (int i = 0; i < container.Count; i++)
+        {
+            if (container[i].blueprint == _blueprint)
+            {
+                Debug.Log("hi");
+                container[i].AddAmount(_amount);
+                hasItem = true;
+                break;
+            }
+        }
+        if (!hasItem)
+        {
+            container.Add(new InventorySlot(_blueprint, _amount));
+        }
     }
+}
 
-    // Update is called once per frame
-    void Update()
+[System.Serializable]
+public class InventorySlot
+{
+    public Blueprint blueprint;
+    public int amount;
+    public InventorySlot(Blueprint _blueprint, int _amount)
     {
-        
+        blueprint = _blueprint;
+        amount = _amount;
     }
-
-    public void AddBlueprint(BlueprintType blueprintType)
+    public void AddAmount(int value)
     {
-        StartCoroutine(AcquireBlueprint(blueprintType));
-    }
-
-    IEnumerator AcquireBlueprint(BlueprintType blueprintType)
-    {
-        interactText.gameObject.SetActive(true);
-        interactText.text = "Acquired <color=blue><b>" + blueprintType + "</color></b> blueprint";
-        yield return new WaitForSeconds(3f);
-        interactText.gameObject.SetActive(false);
-        // ADD BLUEPRINT TO INVENTORY
-        yield return null;
+        amount += value;
     }
 }

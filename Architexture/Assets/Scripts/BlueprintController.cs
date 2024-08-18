@@ -6,15 +6,6 @@ using UnityEngine;
 
 public class BlueprintController : MonoBehaviour
 {
-    public enum BlueprintType
-    {
-        Bridge,
-        Ladder,
-        Stair,
-        Launchpad
-    };
-
-    public BlueprintType blueprintType;
     public Vector3 startingPosition;
     public float hoverSpeed;
     public float offset;
@@ -40,7 +31,7 @@ public class BlueprintController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            interactText.text = "Press <color=green><b>E</color></b> to pick up <color=blue><b>" + blueprintType + "</color></b> blueprint";
+            interactText.text = "Press <color=green><b>E</color></b> to pick up <color=blue><b>" + name + "</color></b> blueprint";
             interactText.gameObject.SetActive(true);
             inPlayerRange = true;
         }
@@ -75,8 +66,14 @@ public class BlueprintController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && inPlayerRange)
         {
             isPickedUp = true;
-            FindObjectOfType<InventoryManager>().AddBlueprint(blueprintType);
-            Destroy(gameObject);
+            FindObjectOfType<DialogController>().AddBlueprint(name);
+
+            var item = GetComponent<Item>();
+            if (item)  // if the item component exists for this blueprint (should always be true)
+            {
+                FindObjectOfType<PlayerController>().AddItemToInventory(item);
+                Destroy(gameObject);
+            }
         }
 
         if (movingUp)
