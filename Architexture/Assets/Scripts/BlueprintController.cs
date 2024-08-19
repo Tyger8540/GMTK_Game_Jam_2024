@@ -31,7 +31,7 @@ public class BlueprintController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            interactText.text = "Press <color=green><b>E</color></b> to pick up <color=blue><b>" + name + "</color></b> blueprint";
+            interactText.text = "Press <color=green><b>F</color></b> to pick up <color=blue><b>" + name + "</color></b> blueprint";
             interactText.gameObject.SetActive(true);
             inPlayerRange = true;
         }
@@ -63,7 +63,7 @@ public class BlueprintController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && inPlayerRange)
+        if (Input.GetKeyDown(KeyCode.F) && inPlayerRange)
         {
             isPickedUp = true;
             FindObjectOfType<DialogController>().AddBlueprint(name);

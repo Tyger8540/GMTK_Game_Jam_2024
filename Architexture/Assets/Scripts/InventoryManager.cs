@@ -26,6 +26,11 @@ public class InventoryManager : ScriptableObject
             container.Add(new InventorySlot(_blueprint, _amount));
         }
     }
+
+    public void RemoveBlueprint(Blueprint _blueprint)
+    {
+
+    }
 }
 
 [System.Serializable]
