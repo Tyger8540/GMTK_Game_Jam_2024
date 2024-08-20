@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: 2
   childColl: {fileID: 0}
+  blueprint: {fileID: 0}
 --- !u!1 &2736954367763389958
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,3 +384,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: 2
   childColl: {fileID: 6976179789609944980}
+  blueprint: {fileID: 11400000, guid: 2ab2ab262511d704daaf863a25aa120c, type: 2}

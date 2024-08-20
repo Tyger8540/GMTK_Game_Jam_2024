@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6727353233073791038}
   m_Layer: 6
   m_Name: Bridge
-  m_TagString: Untagged
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: 3
   childColl: {fileID: 0}
+  blueprint: {fileID: 11400000, guid: a0f4b37d8054bf54b82ede9971d02b7e, type: 2}

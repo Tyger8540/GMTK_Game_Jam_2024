@@ -17,12 +17,16 @@ public class InventoryDisplay : MonoBehaviour
     public Vector3 rightSlot;
     public bool rotatedInventory = false;
     public GameObject selection;
+    public GameObject e;
+    public GameObject q;
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         selection.SetActive(false);
+        e.SetActive(false);
+        q.SetActive(false);
         CreateDisplay();
     }
 
@@ -70,14 +74,32 @@ public class InventoryDisplay : MonoBehaviour
 
     public void UpdateDisplay()
     {
-        if (inventory.container.Count > 0 && !selection.activeSelf)
+        if (inventory.container.Count == 1)
         {
+            e.SetActive(false);
+            q.SetActive(false);
+            selection.SetActive(true);
+        }
+        else if (inventory.container.Count == 2)
+        {
+            e.SetActive(true);
+            q.SetActive(false);
+            selection.SetActive(true);
+        }
+        else if (inventory.container.Count == 3)
+        {
+            e.SetActive(true);
+            q.SetActive(true);
             selection.SetActive(true);
         }
         else if (inventory.container.Count == 0)
         {
             selection.SetActive(false);
+            e.SetActive(false);
+            q.SetActive(false);
         }
+
+
 
         if (rotatedInventory)
         {
@@ -94,7 +116,6 @@ public class InventoryDisplay : MonoBehaviour
             {
                 Destroy(b.gameObject);
             }
-            Debug.Log("ItemsDisplayed count: " + itemsDisplayed.Count);
         }
         for (int i = 0; i < inventory.container.Count; i++)
         {
@@ -119,8 +140,6 @@ public class InventoryDisplay : MonoBehaviour
                     BlueprintDisplay[] bp = FindObjectsOfType<BlueprintDisplay>();
                     foreach (BlueprintDisplay b in bp)
                     {
-                        Debug.Log("b.name: " + b.nameText.text);
-                        Debug.Log("blueprint.name: " + inventory.container[i - 1].blueprint.name);
                         if (b.nameText.text == inventory.container[i - 1].blueprint.name)
                         {
                             Destroy(b.gameObject);
@@ -149,7 +168,6 @@ public class InventoryDisplay : MonoBehaviour
     {
         for (int i = 0; i < inventory.container.Count; i++)
         {
-            Debug.Log("Test 1");
             var obj = Instantiate(inventory.container[i].blueprint.prefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
             TextMeshProUGUI[] children = obj.GetComponentsInChildren<TextMeshProUGUI>();
@@ -165,7 +183,6 @@ public class InventoryDisplay : MonoBehaviour
     }
     public Vector3 GetPosition(int i)
     {
-        Debug.Log("i: " + i);
         if (i == 0)  // NEED TO MAKE CASE WHERE U ONLY HAVE 2 BLUEPRINTS!!!
         {
             return centerSlot;

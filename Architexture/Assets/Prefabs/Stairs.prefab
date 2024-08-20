@@ -429,3 +429,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: 1
   childColl: {fileID: 0}
+  blueprint: {fileID: 11400000, guid: d3cb25968b216f24c84858dc761297d3, type: 2}

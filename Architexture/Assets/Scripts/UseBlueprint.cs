@@ -9,6 +9,7 @@ public class UseBlueprint : MonoBehaviour
     public InventoryManager inventory;
     public float playerReach;
     public PlayerMovement playerMovementScript;
+    public CameraFollow camScript;
     public bool inBlueprintMode = false;
     public GameObject bridgeOutline;
     public GameObject stairsOutline;
@@ -20,6 +21,7 @@ public class UseBlueprint : MonoBehaviour
     void Start()
     {
         playerMovementScript = GetComponent<PlayerMovement>();
+        camScript = FindObjectOfType<CameraFollow>();
     }
 
     // Update is called once per frame
@@ -65,7 +67,7 @@ public class UseBlueprint : MonoBehaviour
                         SetOutlinesRed();
                     }
                 }
-                Debug.Log(new Vector2(GetCurrentOutline().GetComponent<Collider2D>().bounds.center.x - (playerMovementScript.playerDirection * GetCurrentOutline().GetComponent<Collider2D>().bounds.size.x / 2), transform.position.y));
+                //Debug.Log(new Vector2(GetCurrentOutline().GetComponent<Collider2D>().bounds.center.x - (playerMovementScript.playerDirection * GetCurrentOutline().GetComponent<Collider2D>().bounds.size.x / 2), transform.position.y));
 
                 /*if (Physics2D.BoxCast(new Vector2(GetCurrentOutline().GetComponent<Collider2D>().bounds.center.x - (playerMovementScript.playerDirection * GetCurrentOutline().GetComponent<Collider2D>().bounds.size.x / 2), GetCurrentOutline().transform.position.y), new Vector2(.1f, .1f), 0f, Vector2.down, .1f, jumpableGround))
                 {
@@ -80,6 +82,22 @@ public class UseBlueprint : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space) && outlinesBlue)
                 {
                     HideOutlines();
+                    if (GetCurrentOutline() == bridgeOutline)
+                    {
+                        camScript.PlaySound(camScript.bridge);
+                    }
+                    else if (GetCurrentOutline() == stairsOutline)
+                    {
+                        camScript.PlaySound(camScript.stairs);
+                    }
+                    else if (GetCurrentOutline() == ladderOutline)
+                    {
+                        camScript.PlaySound(camScript.ladder);
+                    }
+                    else if (GetCurrentOutline() == springOutline)
+                    {
+                        camScript.PlaySound(camScript.launchpad);
+                    }
                     var obj = Instantiate(blueprint.placedObjectPrefab, Vector3.zero, Quaternion.identity);
                     obj.transform.position = new Vector3(transform.position.x + playerMovementScript.playerDirection * blueprint.placeDistance.x, transform.position.y + blueprint.placeDistance.y, 0f);
                     if (obj.GetComponent<PlaceableController>().orientation != PlaceableController.Orientation.Up && obj.GetComponent<PlaceableController>().orientation != PlaceableController.Orientation.Down)
@@ -99,6 +117,10 @@ public class UseBlueprint : MonoBehaviour
                         inventory.RemoveBlueprint(blueprint);
                         inBlueprintMode = false;
                     }
+                }
+                else if (Input.GetKeyDown(KeyCode.Space) && !outlinesBlue)
+                {
+                    camScript.PlaySound(camScript.invalid);
                 }
             }
         }

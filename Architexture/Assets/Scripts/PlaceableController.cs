@@ -14,6 +14,7 @@ public class PlaceableController : MonoBehaviour
 
     public Orientation orientation;
     public Collider2D childColl;
+    public Blueprint blueprint;
 
     // Start is called before the first frame update
     void Start()

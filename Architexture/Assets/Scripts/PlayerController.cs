@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public InventoryManager inventory;
+    public CameraFollow camScript;
 
     public void AddItemToInventory(Item item)
     {
         inventory.AddBlueprint(item.blueprint, 1);
+        camScript.PlaySound(camScript.checkpoint);
     }
 
     private void OnApplicationQuit()
@@ -28,5 +30,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Pressed Q");
             FindObjectOfType<InventoryDisplay>().RotateDisplay(false);  // rotate CCW
         }
+    }
+
+    private void Start()
+    {
+        camScript = FindObjectOfType<CameraFollow>();
     }
 }

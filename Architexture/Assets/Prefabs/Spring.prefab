@@ -137,6 +137,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 71da2cb14f99d7d4b8e77ed6bd975f85, type: 3}
   - {fileID: 21300000, guid: 311abd5e6ac2f9d469c013d32386433e, type: 3}
+  camScript: {fileID: 0}
 --- !u!114 &5596157447317660288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +152,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: 2
   childColl: {fileID: 0}
+  blueprint: {fileID: 11400000, guid: fc676d4d268e5a843a967e8306f12bc9, type: 2}

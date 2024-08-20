@@ -24,7 +24,7 @@ public class OutlineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (playerMovementScript.playerDirection > 0 && !inRightPosition)
+        if (playerMovementScript.playerDirection > 0 && !inRightPosition)
         {
             ChangeDirection(rightPosition);
             inRightPosition = true;
@@ -33,7 +33,7 @@ public class OutlineController : MonoBehaviour
         {
             ChangeDirection(leftPosition);
             inRightPosition = false;
-        }*/
+        }
     }
 
     public void ChangeDirection(Vector3 position)

@@ -16,6 +16,7 @@ public class BlueprintController : MonoBehaviour
 
     public bool inPlayerRange;
     public bool isPickedUp;
+    public Blueprint blueprint;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class BlueprintController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            interactText.text = "Press <color=green><b>F</color></b> to pick up <color=blue><b>" + name + "</color></b> blueprint";
+            interactText.text = "Press <color=green><b>F</color></b> to pick up <color=blue><b>" + blueprint.name + "</color></b> blueprint";
             interactText.gameObject.SetActive(true);
             inPlayerRange = true;
         }
@@ -66,7 +67,7 @@ public class BlueprintController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && inPlayerRange)
         {
             isPickedUp = true;
-            FindObjectOfType<DialogController>().AddBlueprint(name);
+            FindObjectOfType<DialogController>().AddBlueprint(blueprint.name);
 
             var item = GetComponent<Item>();
             if (item)  // if the item component exists for this blueprint (should always be true)
