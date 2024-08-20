@@ -82,6 +82,11 @@ public class InventoryDisplay : MonoBehaviour
         if (rotatedInventory)
         {
             itemsDisplayed.Clear();
+            if (FindObjectOfType<UseBlueprint>().inBlueprintMode)
+            {
+                FindObjectOfType<UseBlueprint>().HideOutlines();
+                FindObjectOfType<UseBlueprint>().ShowCurrentOutline();
+            }
             rotatedInventory = false;
             // Get rid of prefabs since they get re-instantiated
             BlueprintDisplay[] bp = FindObjectsOfType<BlueprintDisplay>();

@@ -100,10 +100,28 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
         if (dirX < 0f)
         {
+            if (playerDirection >= 0)
+            {
+                Debug.Log("Here");
+                OutlineController[] outlines = FindObjectsOfType<OutlineController>();
+                Debug.Log(outlines.Length);
+                foreach (OutlineController outline in outlines)
+                {
+                    outline.ChangeDirection(outline.leftPosition);
+                }
+            }
             playerDirection = -1;
         }
         else if (dirX > 0f)
         {
+            if (playerDirection < 0)
+            {
+                OutlineController[] outlines = FindObjectsOfType<OutlineController>();
+                foreach (OutlineController outline in outlines)
+                {
+                    outline.ChangeDirection(outline.rightPosition);
+                }
+            }
             playerDirection = 1;
         }
 
