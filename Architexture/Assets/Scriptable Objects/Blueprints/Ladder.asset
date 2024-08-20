@@ -17,3 +17,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a8f41eea066a451449b517f1d3d6e622, type: 3}
   amount: 0
   type: 1
+  placedObjectPrefab: {fileID: 2736954367763389958, guid: 69e772e737f52e042bc896aaa9b7a92d, type: 3}
+  placeDistance: {x: 1.5, y: 1.35}

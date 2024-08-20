@@ -29,7 +29,13 @@ public class InventoryManager : ScriptableObject
 
     public void RemoveBlueprint(Blueprint _blueprint)
     {
-
+        Debug.Log("Trying to remove blueprint " + container[0].blueprint.name);
+        container[0].AddAmount(-1);
+        if (container[0].amount == 0)
+        {
+            container.RemoveAt(0);
+            FindObjectOfType<InventoryDisplay>().rotatedInventory = true;
+        }
     }
 }
 

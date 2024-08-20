@@ -74,6 +74,11 @@ public class InventoryDisplay : MonoBehaviour
         {
             selection.SetActive(true);
         }
+        else if (inventory.container.Count == 0)
+        {
+            selection.SetActive(false);
+        }
+
         if (rotatedInventory)
         {
             itemsDisplayed.Clear();
